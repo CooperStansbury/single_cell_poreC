@@ -122,6 +122,7 @@ def per_read_filter(df, criterion, verbose=0):
     
     for read_idx in df['read_idx'].unique():
         read_df = df[df['read_idx'] == read_idx].reset_index()
+        
         read_df['read_min'] = read_df['fragment_start'].min() # add first fragment
         read_df['read_max'] = read_df['fragment_end'].max() # add last fragment
         read_df = read_df.sort_values(by=['fragment_id', criterion], ascending=False)

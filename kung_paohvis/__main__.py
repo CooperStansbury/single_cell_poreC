@@ -66,14 +66,14 @@ if __name__ == '__main__':
     
     diagnstics = []
     assembly = _io.read_assembly(ASSEMBLY_FILEPATH)
-    df = _io.read_parquet_dir(PARQUET_DIRECTORY)
+    raw = _io.read_parquet_dir(PARQUET_DIRECTORY)
     
     # get intial diagnostics
-    res = _rf.report_alignments(df)
+    res = _rf.report_alignments(raw)
     res['stage'] = 'initial'
     diagnstics.append(res)
 
-    df = _rf.map_chromosome_names(df, assembly)
+    df = _rf.map_chromosome_names(raw, assembly)
     df = _rf.add_fragment_midpoints(df) # compute mid points
     
     if not CHROMOSOME == 'None':
@@ -92,7 +92,12 @@ if __name__ == '__main__':
     ############################################################################################
     # OUTPUTS
     ############################################################################################
-
+    
+    # save raw
+    filename = f"{OUTPUT_DIR}raw_reads_{TODAY}.csv"
+    raw.to_csv(filename, index=False)
+    print(f"done saving: {filename}")
+    
     # save diagnostics
     diagnostic_df = pd.concat(diagnstics, ignore_index=True)
     filename = f"{OUTPUT_DIR}diagnstics_{TODAY}.csv"

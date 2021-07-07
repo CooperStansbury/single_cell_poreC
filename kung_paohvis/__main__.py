@@ -78,10 +78,11 @@ if __name__ == '__main__':
     
     if not CHROMOSOME == 'None':
         df = _rf.subset_chromosome(df, CHROMOSOME, verbose=False) # get a single chromosome
-    df = _rf.drop_low_fragment_count_reads(df, n=FILTER_N_FRAGMENT, verbose=False) # drop reads with low fragment counts
     df = _rf.per_read_filter(df, FRAGMENT_CRITERION, verbose=0) # filter for duplicate within read fragments 
     df = _rf.drop_low_fragment_count_reads(df, n=FILTER_N_FRAGMENT, verbose=False) # drop reads with low fragment counts
     df = _rf.get_maximal_reads(df, N_TOP_READS) # filter for reads spanning the same fragments
+    
+    ## TODO: corrected read filter based on hyperedge order?
     
     # get final diagnostics
     res = _rf.report_alignments(df)

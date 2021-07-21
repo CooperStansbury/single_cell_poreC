@@ -11,5 +11,14 @@ Currently, the tools relies on the following libraries:
 ## Usage
 
 ```
-todo
+usage: [-h] [-bam BAM] [-ref REF] [-output_dir OUTPUT_DIR]
+
+A Python3 commandline tool process bam files for downstream analysis
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -bam BAM              The path to a bam file.
+  -ref REF              The path to a refenerence genome file.
+  -output_dir OUTPUT_DIR
+                        The path to a directory for all output files.
 ```

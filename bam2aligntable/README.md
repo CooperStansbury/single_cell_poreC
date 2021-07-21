@@ -9,6 +9,13 @@ Currently, the tools relies on the following libraries:
 - 
 
 ## Usage
+Example invocation:
+
+```
+python3 bam2aligntable/ -bam development/run02_merged.bam -ref ./development/GCF_000001635.27_GRCm39_genomic.fna -output_dir outputs/
+```
+
+Flags:
 
 ```
 usage: [-h] [-bam BAM] [-ref REF] [-output_dir OUTPUT_DIR]

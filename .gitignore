@@ -4,6 +4,10 @@
 *.7z
 *.txt
 *.parquet
+*.bam
+*.bai
+*.fna
+*.fai
 
 
 # Byte-compiled / optimized / DLL files

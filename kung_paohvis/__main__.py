@@ -19,8 +19,8 @@ if __name__ == '__main__':
     desc = """A Python3 commandline tool process Pore-C-SnakeMake outputs for PaohVis"""
     parser = argparse.ArgumentParser(description=desc)
 
-    parser.add_argument("-parquet_dir", 
-                        help="The path to a directory containing `.parquet' files.")
+    parser.add_argument("-align_path", 
+                        help="The path to a processed alignment table.")
     parser.add_argument("-assembly_path", 
                         help="The path to assembly file for chromosome mapping.")
     parser.add_argument("-output_dir", 
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     # argument parsing - may need to handle more robustly
-    PARQUET_DIRECTORY = args.parquet_dir
+    ALIGNMENT_PATH = args.align_path
     ASSEMBLY_FILEPATH = args.assembly_path
     OUTPUT_DIR = args.output_dir
     CHROMOSOME = args.chrom
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     N_TOP_READS = args.keep_n_reads
     TODAY = datetime.today().strftime('%Y-%m-%d')
     
-    if PARQUET_DIRECTORY is None:
+    if ALIGNMENT_PATH is None:
         raise ValueError("Error: must specify an input directory via `-parquet_dir'")
         
     if ASSEMBLY_FILEPATH is None:
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     
     diagnstics = []
     assembly = _io.read_assembly(ASSEMBLY_FILEPATH)
-    raw = _io.read_parquet_dir(PARQUET_DIRECTORY)
+    raw = pd.read_csv(ALIGNMENT_PATH)
     
     # get intial diagnostics
     res = _rf.report_alignments(raw)
@@ -93,11 +93,6 @@ if __name__ == '__main__':
     ############################################################################################
     # OUTPUTS
     ############################################################################################
-    
-    # save raw
-    filename = f"{OUTPUT_DIR}raw_reads_{TODAY}.csv"
-    raw.to_csv(filename, index=False)
-    print(f"done saving: {filename}")
     
     # save diagnostics
     diagnostic_df = pd.concat(diagnstics, ignore_index=True)

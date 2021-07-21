@@ -13,21 +13,25 @@ Currently, the tools relies on `fastparquet` (https://pypi.org/project/fastparqu
 ## Usage
 
 ```
-usage: kung_paohvis [-h] [-parquet_dir PARQUET_DIR] [-assembly_path ASSEMBLY_PATH] [-chrom [CHROM]] [-filter_frag [FILTER_FRAG]] [-frag_criterion [FRAG_CRITERION]] [-keep_n_reads [KEEP_N_READS]]
+usage:  [-h] [-align_path ALIGN_PATH] [-assembly_path ASSEMBLY_PATH] [-output_dir OUTPUT_DIR] [-chrom [CHROM]] [-filter_frag [FILTER_FRAG]]
+        [-frag_criterion [FRAG_CRITERION]] [-keep_n_reads [KEEP_N_READS]]
 
 A Python3 commandline tool process Pore-C-SnakeMake outputs for PaohVis
 
 optional arguments:
   -h, --help            show this help message and exit
-  -parquet_dir PARQUET_DIR
-                        The path to a directory containing `.parquet` files.
+  -align_path ALIGN_PATH
+                        The path to a processed alignment table.
   -assembly_path ASSEMBLY_PATH
                         The path to assembly file for chromosome mapping.
+  -output_dir OUTPUT_DIR
+                        The path to a directory for all output files.
   -chrom [CHROM]        If not `None`, will subset to a specific chromosome. Defaults to 19.
   -filter_frag [FILTER_FRAG]
                         Reads with `filter_frag` or fewer fragments will be dropped.
   -frag_criterion [FRAG_CRITERION]
                         A valid column name to use asa tie-breaking metric for sequences that mapped to the same location on the reference genome.
   -keep_n_reads [KEEP_N_READS]
-                        The number of reads that share beginning and ending fragments to keep. It is biologically feasible for up to 4, with low probability (parental and M phase cells).
+                        The number of reads that share beginning and ending fragments to keep. It is biologically feasible for up to 4, with low probability (parental and
+                        M phase cells).
 ```

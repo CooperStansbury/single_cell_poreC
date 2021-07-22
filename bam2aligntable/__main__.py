@@ -37,6 +37,9 @@ if __name__ == '__main__':
     # DATA PROCESSING
     ############################################################################################
     
+    # reformat BAM
+    create_table.reformat_bam(bam_path, bam_path)
+    
     # load the bam file
     align_df = create_table.create_table(bam_path)
     print(f"align_df.shape: {align_df.shape}")
